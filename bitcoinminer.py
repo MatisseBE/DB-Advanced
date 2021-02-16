@@ -14,7 +14,7 @@ def Scraper():
         for transactions in soup.find_all('div',{"class": "sc-1g6z4xm-0 hXyplo"}):
             transaction = []
             #print()
-            print('finding transactions')
+            #print('finding transactions')
             for hash in transactions.find('a'):
                 #print(hash)
                 transaction.append(hash)
