@@ -15,4 +15,5 @@ In your Ubuntu terminal execute the following commands:
 `<pip3 install pandas>`
 
 Navigate to the folder in which you have saved the scraper using the 'cd' command and execute the following code:
-python3 bitcoinminer.py
+
+`<python3 bitcoinminer.py>`
