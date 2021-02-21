@@ -41,8 +41,8 @@ def Scraper():
             df = df.append(new_row,ignore_index=True)
 
         else:                                                                                                                       #If new time
-            print(df)   
-            print(df['Amount (USD)'].max())                                                                                         #Print highest value
+            #print(df)
+            print("$%s for time %s" % (str(df['Amount (USD)'].max()),currenttime))                                                  #Print highest value
 
             currenttime = Time                                                                                                      #Set new time
 
