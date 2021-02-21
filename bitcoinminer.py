@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-import time
 from datetime import datetime, timezone
 
 def Scraper():
@@ -10,7 +9,7 @@ def Scraper():
 
     #print("callsing site")
                                                                                                                                     #Access the site
-    response = requests.get("https://www.blockchain.com/btc/unconfirmed-transactions", headers={"User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141 Safari/537.36"})  
+    response = requests.get("https://www.blockchain.com/btc/unconfirmed-transactions")  
     #print("call complete")
     site = response.text
     soup = BeautifulSoup(site,'html.parser')                                                                                        #Interpret html
@@ -42,7 +41,18 @@ def Scraper():
 
         else:                                                                                                                       #If new time
             #print(df)
-            print("$%s for time %s" % (str(df['Amount (USD)'].max()),currenttime))                                                  #Print highest value
+            # print("$%s for time %s" % (str(df['Amount (USD)'].max()),currenttime))                                                  #Print highest value
+            # indx = df['Amount (USD)'].argmax()
+            # print(df.iloc[indx]['Hash'])                                                                                            #Print highest value
+            # print(df.iloc[indx]['Time'])                                                                                            #Print highest value
+            # print(df.iloc[indx]['Amount (BTC)'])                                                                                    #Print highest value
+
+            indx = df['Amount (USD)'].argmax()
+            print("$%s for time %s equal to %s BTC with hash `%s´" % (str(df.iloc[indx]['Amount (USD)']),str(df.iloc[indx]['Time']),str(df.iloc[indx]['Amount (BTC)']),str(df.iloc[indx]['Hash'])))  
+            # print(df.iloc[indx]['Amount (USD)'])                                                                                  #Print highest value
+            # print(df.iloc[indx]['Hash'])                                                                                          #Print highest value
+            # print(df.iloc[indx]['Time'])                                                                                          #Print highest value
+            # print(df.iloc[indx]['Amount (BTC)'])                                                                                  #Print highest value
 
             currenttime = Time                                                                                                      #Set new time
 
