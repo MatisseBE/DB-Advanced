@@ -38,7 +38,7 @@ Navigate to the folder in which you have saved the scraper using the 'cd' comman
 
 `sudo systemctl daemon-reload`
 
-`sudo systemctl status mongod` &nbsp;&nbsp;(should show running)
+`sudo systemctl status mongod`  * (should show running)
 
 `sudo systemctl enable mongod`
 
@@ -46,7 +46,7 @@ Navigate to the folder in which you have saved the scraper using the 'cd' comman
 
 `sudo systemctl restart mongod`
 
-`mongo` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  (to start using it)
+`mongo` + (to start using it)
 
 
 ## MongoDB compass
