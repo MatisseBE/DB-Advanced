@@ -22,22 +22,33 @@ Navigate to the folder in which you have saved the scraper using the 'cd' comman
 
 ## Install MongoDB
 `wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -`
+
 `echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list`
+
 `sudo apt-get update`
+
 `sudo apt-get install -y mongodb-org`
+
 `ps --no-headers -o comm 1`
 
 # Start MongoDB
 `sudo systemctl start mongod`
+
 `sudo systemctl daemon-reload`
+
 `sudo systemctl status mongod` <should show running>
 `sudo systemctl enable mongod`
+
 `sudo systemctl stop mongod`
+
 `sudo systemctl restart mongod`
+
 `mongo` <start using it>
 
 # MongoDB compass
 `wget https://downloads.mongodb.com/compass/mongodb-compass_1.25.0_amd64.deb`
+
 `sudo dpkg -i mongodb-compass_1.25.0_amd64.deb`
+
 `mongodb-compass`
 
