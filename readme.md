@@ -15,6 +15,8 @@ In your Ubuntu terminal execute the following commands:
 
 `pip3 install pandas`
 
+`pip3 install pymongo`
+
 Navigate to the folder in which you have saved the scraper using the 'cd' command and execute the following code:
 
 `python3 bitcoinminer.py`
@@ -31,21 +33,22 @@ Navigate to the folder in which you have saved the scraper using the 'cd' comman
 
 `ps --no-headers -o comm 1`
 
-# Start MongoDB
+## Start MongoDB
 `sudo systemctl start mongod`
 
 `sudo systemctl daemon-reload`
 
-`sudo systemctl status mongod` <should show running>
+`sudo systemctl status mongod` (should show `running`)
+
 `sudo systemctl enable mongod`
 
 `sudo systemctl stop mongod`
 
 `sudo systemctl restart mongod`
 
-`mongo` <start using it>
+`mongo` (to start using it)
 
-# MongoDB compass
+## MongoDB compass
 `wget https://downloads.mongodb.com/compass/mongodb-compass_1.25.0_amd64.deb`
 
 `sudo dpkg -i mongodb-compass_1.25.0_amd64.deb`

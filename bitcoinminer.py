@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime, timezone
+import pymongo as mongo
 
 def Scraper():
     global df                                                                                                                       #to not get lost when rerunning
@@ -47,12 +48,35 @@ def Scraper():
             # print(df.iloc[indx]['Time'])                                                                                            #Print highest value
             # print(df.iloc[indx]['Amount (BTC)'])                                                                                    #Print highest value
 
+            print(df.dtypes)
             indx = df['Amount (USD)'].argmax()
-            print("$%s for time %s equal to %s BTC with hash `%s´" % (str(df.iloc[indx]['Amount (USD)']),str(df.iloc[indx]['Time']),str(df.iloc[indx]['Amount (BTC)']),str(df.iloc[indx]['Hash'])))  
+            #print("$%s for time %s equal to %s BTC with hash `%s´" % (str(df.iloc[indx]['Amount (USD)']),str(df.iloc[indx]['Time']),str(df.iloc[indx]['Amount (BTC)']),str(df.iloc[indx]['Hash'])))  
             # print(df.iloc[indx]['Amount (USD)'])                                                                                  #Print highest value
             # print(df.iloc[indx]['Hash'])                                                                                          #Print highest value
             # print(df.iloc[indx]['Time'])                                                                                          #Print highest value
             # print(df.iloc[indx]['Amount (BTC)'])                                                                                  #Print highest value
+
+#################################################################################################################################################################################
+
+            Hash = df.iloc[indx]['Hash']
+            Time = df.iloc[indx]['Time']
+            USD = df.iloc[indx]['Amount (USD)']
+            BTC = df.iloc[indx]['Amount (BTC)']
+
+
+            # Make new collections
+            col_mining = bitcoindb["Largest_entry"]
+
+            # data
+            data = {"Hash": Hash, "Time": Time, "USD": USD, "BTC": BTC}
+
+            # insert
+            x = col_mining.insert_one(data)
+
+            # print
+            print (x.inserted_id)
+
+###################################################################################################################################################################################
 
             currenttime = Time                                                                                                      #Set new time
 
@@ -75,7 +99,19 @@ def Scraper():
 now = datetime.now(timezone.utc)                                                                                                     #Get current Zulu time (website utilizes UTC/GMT)                                                                           
 currenttime=now.strftime('%H:%M')                                                                                                    #Get hour and minutes of current time
 
-df = pd.DataFrame(columns=['Hash','Time','Amount (BTC)','Amount (USD)'])                                                             #Initialize dataframe                
+df = pd.DataFrame(columns=['Hash','Time','Amount (BTC)','Amount (USD)'])                                                             #Initialize dataframe       
+
+#Connect to mongo
+client = mongo.MongoClient ("mongodb://127.0.0.1:27017")
+
+# Make new DB
+bitcoindb = client["Mining_operation"]
+
+
+                                                            
+
+
+
 
 #Run project
 while True:
