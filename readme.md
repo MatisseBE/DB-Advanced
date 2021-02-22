@@ -38,7 +38,7 @@ Navigate to the folder in which you have saved the scraper using the 'cd' comman
 
 `sudo systemctl daemon-reload`
 
-`sudo systemctl status mongod`      (should show `running`)
+`sudo systemctl status mongod`      (should show running)
 
 `sudo systemctl enable mongod`
 
