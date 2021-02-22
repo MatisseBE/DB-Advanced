@@ -48,35 +48,31 @@ def Scraper():
             # print(df.iloc[indx]['Time'])                                                                                            #Print highest value
             # print(df.iloc[indx]['Amount (BTC)'])                                                                                    #Print highest value
 
-            print(df.dtypes)
+            print(df.dtypes)    #for error handling (hypoth: empty frame)
             indx = df['Amount (USD)'].argmax()
-            #print("$%s for time %s equal to %s BTC with hash `%s´" % (str(df.iloc[indx]['Amount (USD)']),str(df.iloc[indx]['Time']),str(df.iloc[indx]['Amount (BTC)']),str(df.iloc[indx]['Hash'])))  
+            print("$%s for time %s equal to %s BTC with hash `%s´" % (str(df.iloc[indx]['Amount (USD)']),str(df.iloc[indx]['Time']),str(df.iloc[indx]['Amount (BTC)']),str(df.iloc[indx]['Hash'])))  
+
             # print(df.iloc[indx]['Amount (USD)'])                                                                                  #Print highest value
             # print(df.iloc[indx]['Hash'])                                                                                          #Print highest value
             # print(df.iloc[indx]['Time'])                                                                                          #Print highest value
             # print(df.iloc[indx]['Amount (BTC)'])                                                                                  #Print highest value
 
-#################################################################################################################################################################################
+################################################################--Mongo DB code--########################################################################
 
             Hash = df.iloc[indx]['Hash']
             Time = df.iloc[indx]['Time']
             USD = df.iloc[indx]['Amount (USD)']
             BTC = df.iloc[indx]['Amount (BTC)']
 
+            col_mining = bitcoindb["Largest_entry"]                                                                                 #Make new collections
+            
+            data = {"Hash": Hash, "Time": Time, "USD": USD, "BTC": BTC}                                                             #Format data
 
-            # Make new collections
-            col_mining = bitcoindb["Largest_entry"]
+            x = col_mining.insert_one(data)                                                                                         #Insert data
 
-            # data
-            data = {"Hash": Hash, "Time": Time, "USD": USD, "BTC": BTC}
+            # print(x.inserted_id)                                                                                                  #Prints ID in said collection in mongodb
 
-            # insert
-            x = col_mining.insert_one(data)
-
-            # print
-            print (x.inserted_id)
-
-###################################################################################################################################################################################
+###########################################################################################################################################################
 
             currenttime = Time                                                                                                      #Set new time
 
@@ -101,11 +97,13 @@ currenttime=now.strftime('%H:%M')                                               
 
 df = pd.DataFrame(columns=['Hash','Time','Amount (BTC)','Amount (USD)'])                                                             #Initialize dataframe       
 
-#Connect to mongo
-client = mongo.MongoClient ("mongodb://127.0.0.1:27017")
+client = mongo.MongoClient("mongodb://127.0.0.1:27017")                                                                             #Connect to mongo
+bitcoindb = client["Mining_operation"]                                                                                               #Make new DB
 
-# Make new DB
-bitcoindb = client["Mining_operation"]
+
+#Run project
+while True:
+    Scraper()
 
 
                                                             
@@ -113,9 +111,6 @@ bitcoindb = client["Mining_operation"]
 
 
 
-#Run project
-while True:
-    Scraper()
 
         
     
