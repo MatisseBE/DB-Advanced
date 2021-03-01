@@ -17,9 +17,15 @@ In your Ubuntu terminal execute the following commands:
 
 `pip3 install pymongo`
 
+`pip3 install redis`
+
 Navigate to the folder in which you have saved the scraper using the 'cd' command and execute the following code:
 
 `python3 bitcoinminer.py`
+
+Then, for each update, execute: 
+
+`python3 contactredis.py`
 
 
 ## Install MongoDB
@@ -46,7 +52,7 @@ Navigate to the folder in which you have saved the scraper using the 'cd' comman
 
 `sudo systemctl restart mongod`
 
-`mongo` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(to start using it)
+`mongo` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(to start using it)
 
 
 ## MongoDB compass
@@ -55,4 +61,12 @@ Navigate to the folder in which you have saved the scraper using the 'cd' comman
 `sudo dpkg -i mongodb-compass_1.25.0_amd64.deb`
 
 `mongodb-compass`
+
+## Install Redis
+`wget http://download.redis.io/redis-stable.tar.gz`
+`tar xvzf redis-stable.tar.gz`
+`cd redis-stable`
+`make`
+
+
 

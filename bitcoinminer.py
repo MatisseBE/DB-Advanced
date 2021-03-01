@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime, timezone
 import pymongo as mongo
+import redis
 
 def Scraper():
     global df                                                                                                                       #to not get lost when rerunning
@@ -41,38 +42,26 @@ def Scraper():
             df = df.append(new_row,ignore_index=True)
 
         else:                                                                                                                       #If new time
-            #print(df)
-            # print("$%s for time %s" % (str(df['Amount (USD)'].max()),currenttime))                                                  #Print highest value
-            # indx = df['Amount (USD)'].argmax()
-            # print(df.iloc[indx]['Hash'])                                                                                            #Print highest value
-            # print(df.iloc[indx]['Time'])                                                                                            #Print highest value
-            # print(df.iloc[indx]['Amount (BTC)'])                                                                                    #Print highest value
 
-            print(df.dtypes)    #for error handling (hypoth: empty frame)
-            indx = df['Amount (USD)'].argmax()
+            #print(df)
+
+            print(df.dtypes)                                                                                                        #For error handling (hypoth: empty frame)
+            indx = df['Amount (USD)'].argmax()                                                                                      #Get row number where USD is the highest
             print("$%s for time %s equal to %s BTC with hash `%s´" % (str(df.iloc[indx]['Amount (USD)']),str(df.iloc[indx]['Time']),str(df.iloc[indx]['Amount (BTC)']),str(df.iloc[indx]['Hash'])))  
+
+            datajson = df.to_json(orient="index")                                                                                   #Rewrite dataframe to JSON format
+
 
             # print(df.iloc[indx]['Amount (USD)'])                                                                                  #Print highest value
             # print(df.iloc[indx]['Hash'])                                                                                          #Print highest value
             # print(df.iloc[indx]['Time'])                                                                                          #Print highest value
             # print(df.iloc[indx]['Amount (BTC)'])                                                                                  #Print highest value
 
-################################################################--Mongo DB code--########################################################################
 
-            Hash = df.iloc[indx]['Hash']
-            Time = df.iloc[indx]['Time']
-            USD = df.iloc[indx]['Amount (USD)']
-            BTC = df.iloc[indx]['Amount (BTC)']
 
-            col_mining = bitcoindb["Largest_entry"]                                                                                 #Make new collections
-            
-            data = {"Hash": Hash, "Time": Time, "USD": USD, "BTC": BTC}                                                             #Format data
 
-            x = col_mining.insert_one(data)                                                                                         #Insert data
+            r.set("df", str(datajson))                                                                                              #In Redis DB, set key "df" to value of string JSON of pandas DF
 
-            # print(x.inserted_id)                                                                                                  #Prints ID in said collection in mongodb
-
-###########################################################################################################################################################
 
             currenttime = Time                                                                                                      #Set new time
 
@@ -97,8 +86,9 @@ currenttime=now.strftime('%H:%M')                                               
 
 df = pd.DataFrame(columns=['Hash','Time','Amount (BTC)','Amount (USD)'])                                                             #Initialize dataframe       
 
-client = mongo.MongoClient("mongodb://127.0.0.1:27017")                                                                             #Connect to mongo
-bitcoindb = client["Mining_operation"]                                                                                               #Make new DB
+
+r = redis.Redis()                                                                                                                    #Initialize Redis DB
+
 
 
 #Run project
