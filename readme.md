@@ -68,5 +68,19 @@ Then, for each update, execute:
 `cd redis-stable`
 `make`
 
+# Install Docker
+`https://www.docker.com/get-started`
+
+Download any additional software if prompted.
+
+`docker run hello-world`
+
+`docker pull mongo`
+
+`docker pull redis`
+
+`docker run -p 8080:6379 redis`
+
+`docker run mongo`
 
 

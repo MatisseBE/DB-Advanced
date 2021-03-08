@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime, timezone
-import pymongo as mongo
+import os
 import redis
 
 def Scraper():
@@ -62,6 +62,8 @@ def Scraper():
 
             r.set("df", str(datajson))                                                                                              #In Redis DB, set key "df" to value of string JSON of pandas DF
 
+            os.popen()
+
 
             currenttime = Time                                                                                                      #Set new time
 
@@ -87,7 +89,7 @@ currenttime=now.strftime('%H:%M')                                               
 df = pd.DataFrame(columns=['Hash','Time','Amount (BTC)','Amount (USD)'])                                                             #Initialize dataframe       
 
 
-r = redis.Redis()                                                                                                                    #Initialize Redis DB
+r = redis.Redis(host='localhost', port=8080, db=0)                                                                                                                    #Initialize Redis DB
 
 
 

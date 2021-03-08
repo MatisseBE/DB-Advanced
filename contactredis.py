@@ -2,7 +2,7 @@ import redis
 import pymongo as mongo
 import pandas as pd
 
-r = redis.Redis()                                                                                               #Call Redis
+r = redis.Redis(host='localhost', port=8080, db=0)                                                                                               #Call Redis
 
 datajson = r.get("df")                                                                                          #Get value of key df from Redis DB
 df = pd.read_json(datajson,orient="index")  	                                                                #Parse Redis value(string), desguised as JSON, into a pandas DataFrame
@@ -20,7 +20,7 @@ BTC = df.iloc[indx]['Amount (BTC)']
 print("$%s for time %s equal to %s BTC with hash `%s´" % (str(df.iloc[indx]['Amount (USD)']),str(df.iloc[indx]['Time']),str(df.iloc[indx]['Amount (BTC)']),str(df.iloc[indx]['Hash'])))  
 
 
-client = mongo.MongoClient("mongodb://127.0.0.1:27017")                                                         #Connect to mongo
+client = mongo.MongoClient("mongodb://127.0.0.1:8081")                                                         #Connect to mongo 27017
 bitcoindb = client["Mining_operation"]                                                                          #Make new DB
 
 
