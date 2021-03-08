@@ -79,8 +79,15 @@ Download any additional software if prompted.
 
 `docker pull redis`
 
+
+
+# Run the program
 `docker run -p 8080:6379 redis`
 
-`docker run mongo`
+`docker run -p 8081:27017 mongo`
+
+run `bitcoinminer.py`
+then `contactredis.py`
+
 
 
