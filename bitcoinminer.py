@@ -4,6 +4,7 @@ import pandas as pd
 from datetime import datetime, timezone
 import os
 import redis
+from contactredis import RedisToMongo
 
 def Scraper():
     global df                                                                                                                       #to not get lost when rerunning
@@ -45,9 +46,9 @@ def Scraper():
 
             #print(df)
 
-            print(df.dtypes)                                                                                                        #For error handling (hypoth: empty frame)
+            #print(df.dtypes)                                                                                                        #For error handling (hypoth: empty frame)
             indx = df['Amount (USD)'].argmax()                                                                                      #Get row number where USD is the highest
-            print("$%s for time %s equal to %s BTC with hash `%s´" % (str(df.iloc[indx]['Amount (USD)']),str(df.iloc[indx]['Time']),str(df.iloc[indx]['Amount (BTC)']),str(df.iloc[indx]['Hash'])))  
+            #print("From miner: $%s for time %s equal to %s BTC with hash `%s´" % (str(df.iloc[indx]['Amount (USD)']),str(df.iloc[indx]['Time']),str(df.iloc[indx]['Amount (BTC)']),str(df.iloc[indx]['Hash'])))  
 
             datajson = df.to_json(orient="index")                                                                                   #Rewrite dataframe to JSON format
 
@@ -62,7 +63,7 @@ def Scraper():
 
             r.set("df", str(datajson))                                                                                              #In Redis DB, set key "df" to value of string JSON of pandas DF
 
-            os.popen()
+            print(RedisToMongo())                                                                                                   #Executes the contact redis script
 
 
             currenttime = Time                                                                                                      #Set new time

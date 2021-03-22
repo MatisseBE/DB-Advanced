@@ -1,5 +1,7 @@
 # DB Advanced
-## Install Python
+## Linux
+
+### Install Python
 
 In your Ubuntu terminal execute the following commands:
 
@@ -88,6 +90,43 @@ Download any additional software if prompted.
 
 run `bitcoinminer.py`
 then `contactredis.py`
+
+
+# DB Advanced
+## Prerequisites
+### Install Docker
+`https://www.docker.com/get-started`
+
+Download any additional software if prompted.
+
+`docker pull mongo`
+
+`docker pull redis`
+
+### Install MongoDB Compass
+Download the latest MongoDB compass for your platform via the following link:
+
+`https://www.mongodb.com/products/compass` 
+
+
+## Get started
+Clone this repository
+
+Start Docker Desktop, make sure it say "Running" at the bottom left.
+
+Execute the .bat files in order, on you Windows machine.
+
+Start MongoDB compass to see entries added to the database.
+
+In Compass, click `Fill in connection fields individually`
+
+Set hostname `localhost`
+Set port `8080`
+
+## What's happening?
+The .bat file will start Redis and MongoDB in a Docker Container.  
+
+Once these containers are booted, our script will run. Every minute you'll see a line with the hashcode of the biggest bitcointransaction of last minute. 
 
 
 
