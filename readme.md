@@ -2,7 +2,7 @@
 ## What is this
 This repository is created as an assignment for Thomas More University.
 
-It will scrape a website to find the largest transaction made in Bitcoin for any minute. This entry will be added to a MongoDB set-up in a docker container. Redis is used to store a pandas data frame with all scraped data of the last minute. 
+It will scrape a website to find the largest transaction made in Bitcoin for any minute. This entry will be added to a MongoDB, set-up in a docker container. Redis is used to store a pandas data frame with all scraped data of the last minute. Redis also runs in Docker 
 ## Prerequisites
 ### Install Docker
 `https://www.docker.com/get-started`
@@ -18,7 +18,7 @@ Download the latest MongoDB compass for your platform via the following link:
 
 `https://www.mongodb.com/products/compass` 
 
-### Install Pythen3 .9
+### Install Python 3.9
 Install python 3.9 (including pip) and run the following commands:
 
 `pip3 install bs4`
@@ -41,7 +41,7 @@ Start MongoDB compass to see entries added to the database.
 In Compass, click `Fill in connection fields individually`
 
 Set hostname `localhost`
-Set port `8081`
+and set port `8081` then click `Connect`
 
 Navigate `Mining_operation < Largest_entry`
 
